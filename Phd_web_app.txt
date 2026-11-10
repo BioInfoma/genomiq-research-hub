@@ -1,0 +1,795 @@
+
+# PROJECT: GenomIQ Research Hub
+## Personal PhD Research Intelligence and Management Platform
+
+### YOUR ROLE
+
+Act as a senior full-stack software engineer, bioinformatics
+software architect, research informatics specialist and UX designer.
+
+Your task is to design and build a fully functional, free,
+personal research management and literature intelligence
+platform called GenomIQ Research Hub.
+
+Do not build a static mockup or a dashboard containing
+dummy information.
+
+Build a working application with a functioning database,
+real academic literature integrations, automated discovery,
+literature recommendations, research documentation,
+progress tracking and export functionality.
+
+You have access to the development environment, terminal,
+browser and relevant tools. Use them to inspect, develop,
+test and verify the application.
+
+Prioritise free and open-source technologies.
+
+Do not introduce paid APIs, subscriptions or services as
+mandatory dependencies.
+
+==================================================
+1. USER AND RESEARCH PROFILE
+==================================================
+
+The application is being developed for a PhD researcher
+in Bioinformatics, Human Genomics and Cancer Genomics.
+
+Primary research interests:
+
+A. HUMAN GENOMICS AND PANGENOMICS
+- Human population genomics
+- Human reference genome development
+- Population-specific pangenomes
+- Graph-based genome representations
+- Genome assembly
+- Haplotype-resolved assemblies
+- Structural variation
+- Population genetic variation
+- African population genomics
+- Reference genome bias
+- Genome annotation
+
+B. CANCER GENOMICS
+- Cancer genomics
+- Colorectal cancer genomics
+- Somatic mutation discovery
+- Somatic variant calling
+- Germline versus somatic variation
+- Tumour mutational burden (TMB)
+- Tumour heterogeneity
+- Cancer-associated structural variants
+- Copy number variations
+- Single nucleotide variants
+- Insertions and deletions
+- Cancer precision medicine
+- Immunotherapy biomarkers
+- Functional consequences of mutations
+
+C. FUNCTIONAL GENOMICS
+- Gene expression analysis
+- RNA sequencing
+- Transcriptomics
+- Single-cell genomics
+- Epigenomics
+- Gene regulation
+- Functional variant annotation
+- Regulatory genomics
+- Multi-omics integration
+
+D. BIOINFORMATICS AND COMPUTATIONAL GENOMICS
+- Variant calling pipelines
+- Variant benchmarking
+- Genome alignment
+- Read mapping
+- Genome assembly algorithms
+- Graph genome tools
+- Sequence analysis
+- Workflow automation
+- Reproducible bioinformatics
+- Statistical genetics
+- Machine learning in genomics
+
+E. COMPLEMENTARY RESEARCH AREAS
+
+The user may also work on external research projects.
+Maintain secondary research interests in:
+
+- Pathogen genomics
+- Viral genomics
+- Bacterial genomics
+- Phylogenomics
+- Phylogenetics
+- Phylodynamics
+- Phylogeography
+- Molecular evolution
+- Evolutionary epidemiology
+- One Health genomics
+- Molecular surveillance
+
+These secondary topics should not overwhelm the primary
+human genomics and cancer genomics recommendations.
+
+Allow the user to edit, add, remove and reprioritise topics.
+
+==================================================
+2. APPLICATION ARCHITECTURE
+==================================================
+
+Use the following technology stack:
+
+- Python as the primary programming language.
+- Streamlit for the web interface.
+- SQLite for persistent local storage.
+- SQLAlchemy for database operations.
+- Pandas for data processing.
+- Plotly for interactive charts.
+- Requests and HTTPX for API requests.
+- Feedparser for RSS feeds.
+- BeautifulSoup for permitted webpage extraction.
+- APScheduler for background scheduling.
+- Pydantic for data validation.
+- Pytest for testing.
+
+Use a modular architecture.
+
+Separate:
+- Frontend
+- Database
+- Literature discovery
+- Recommendation engine
+- Web monitoring
+- Documentation management
+- Scheduling
+- Data processing
+- Export utilities
+
+Use environment variables for configuration.
+Never hardcode API keys or credentials.
+
+Create a requirements.txt and a README.md.
+
+The application must run locally on Windows and Linux.
+
+Provide clear setup instructions.
+
+==================================================
+3. AUTOMATED LITERATURE DISCOVERY ENGINE
+==================================================
+
+Build a literature discovery engine that continuously
+searches relevant academic databases.
+
+Integrate these sources:
+
+1. OpenAlex API
+2. PubMed through NCBI E-utilities
+3. Europe PMC REST API
+4. Crossref API
+5. Semantic Scholar API
+6. bioRxiv
+7. medRxiv
+
+Use official APIs, RSS feeds and permitted data access
+methods wherever available.
+
+Do not depend on Google Scholar scraping.
+
+Do not bypass paywalls or download copyrighted papers
+without permission.
+
+Respect robots.txt, API rate limits, website terms and
+repository licensing conditions.
+
+LITERATURE SEARCH FUNCTIONALITY:
+
+The system should support:
+
+- Keyword-based searches.
+- Multiple keyword combinations.
+- Boolean search queries where supported.
+- Topic-based searches.
+- Author searches.
+- DOI searches.
+- Publication date filtering.
+- Journal filtering.
+- Open-access filtering.
+- Publication type filtering.
+- Citation-based discovery.
+
+Create configurable search profiles.
+
+Initial search profiles should include:
+
+PROFILE 1: Human Pangenomics
+PROFILE 2: African Population Genomics
+PROFILE 3: Cancer and Somatic Variant Calling
+PROFILE 4: Colorectal Cancer Genomics
+PROFILE 5: Tumour Mutational Burden
+PROFILE 6: Functional Genomics
+PROFILE 7: Genome Assembly and Alignment
+PROFILE 8: Bioinformatics Methods
+PROFILE 9: Pathogen Genomics
+PROFILE 10: Phylodynamics and Phylogeography
+
+Allow users to create custom profiles.
+
+AUTOMATION:
+
+- Search for newly published papers daily.
+- Search preprint repositories daily.
+- Run broader literature searches weekly.
+- Avoid duplicate records.
+- Store publication metadata.
+- Record the source database.
+- Record the date discovered.
+- Update existing publication metadata when necessary.
+
+Create a central literature database.
+
+Each publication should have:
+
+- Title
+- Authors
+- Abstract
+- DOI
+- PMID where available
+- Publication year
+- Publication date
+- Journal
+- Publication type
+- Keywords
+- Research topics
+- Citation count where available
+- Open-access status
+- PDF availability
+- PDF URL when legally available
+- Publisher URL
+- Source database
+- Date discovered
+- Relevance score
+- Reading status
+
+Use DOI as the primary deduplication identifier,
+followed by PMID and other available identifiers.
+
+==================================================
+4. INTELLIGENT PAPER RECOMMENDATION ENGINE
+==================================================
+
+This is a core feature.
+
+The supervisor expects the user to read FOUR papers
+every week.
+
+Develop an intelligent recommendation engine that
+selects four papers every week.
+
+Do not simply recommend the newest four publications.
+
+Use a weighted recommendation algorithm.
+
+Consider:
+
+1. Relevance to the user's PhD research.
+2. Relevance to active research topics.
+3. Publication recency.
+4. Scientific influence and citation information.
+5. Methodological relevance.
+6. Foundational importance.
+7. Novelty of findings.
+8. Relationship to previously read papers.
+9. Whether the user has already read the paper.
+
+Initial weekly allocation:
+
+- Two papers: Core research topics.
+- One paper: Computational or methodological topics.
+- One paper: Complementary research topics.
+
+Allow the allocation to be customised.
+
+The recommendation engine should distinguish:
+
+- Foundational papers.
+- Landmark papers.
+- Recent research.
+- Review articles.
+- Methodological papers.
+- Experimental studies.
+- Critical or contrasting studies.
+
+RECOMMENDATION EXPLANATION:
+
+Every recommended paper must include:
+
+1. Why this paper was selected.
+2. Which research interest it addresses.
+3. Its relevance to the PhD.
+4. Three important things to learn from it.
+5. Whether it is foundational, recent or methodological.
+6. Suggested prerequisite papers where applicable.
+
+Do not fabricate recommendation explanations.
+
+Base recommendations on available metadata, abstracts
+and accessible article content.
+
+Provide an option to generate a reading pathway
+from introductory papers to advanced publications.
+
+The user must be able to accept, reject, postpone
+or replace recommendations.
+
+Do not recommend the same paper repeatedly unless
+it is intentionally marked for revision.
+
+==================================================
+5. FOUR-PAPER WEEKLY READING TRACKER
+==================================================
+
+Create a dedicated weekly reading section.
+
+Display the four recommended papers.
+
+Each paper should have these statuses:
+
+- Recommended
+- Accepted
+- Reading
+- Completed
+- Revisit
+- Not relevant
+
+Allow the user to record:
+
+- Date started
+- Date completed
+- Reading duration
+- Personal notes
+- Main findings
+- Important methods
+- Limitations
+- Questions raised
+- Relevance to the PhD
+- Potential research applications
+
+Create a weekly reading report.
+
+Track:
+
+- Number of papers recommended.
+- Number accepted.
+- Number completed.
+- Weekly completion percentage.
+- Total papers read.
+- Reading consistency.
+- Research topics covered.
+
+Generate a monthly and yearly reading report.
+
+Maintain historical records of previous recommendations.
+
+==================================================
+6. RESEARCH DOCUMENTATION MANAGEMENT
+==================================================
+
+Create a research documentation module.
+
+The user should be able to document:
+
+A. RESEARCH IDEAS
+- New research ideas.
+- Potential hypotheses.
+- Research questions.
+- Novel observations.
+- Potential collaborations.
+- Future research directions.
+
+B. RESEARCH METHODS
+- Bioinformatics methods.
+- Algorithms.
+- Statistical methods.
+- Genome assembly methods.
+- Variant calling approaches.
+- Benchmarking strategies.
+- Software tools.
+- Computational workflows.
+
+C. RESEARCH NOTES
+- Notes from individual papers.
+- General scientific notes.
+- Meeting notes.
+- Supervisor feedback.
+- Research decisions.
+- Questions requiring further investigation.
+
+D. RESEARCH ACTIVITIES
+- Completed tasks.
+- Ongoing activities.
+- Planned experiments.
+- Data acquisition.
+- Computational analyses.
+- Manuscript preparation.
+
+Allow tagging and linking documentation to papers.
+
+Provide search and filtering functionality.
+
+Support Markdown notes and automatic timestamps.
+
+Allow export to Markdown, PDF and DOCX.
+
+==================================================
+7. BIOINFORMATICS SOFTWARE AND METHODS DATABASE
+==================================================
+
+Create a dedicated database for bioinformatics tools.
+
+The user should be able to document and track tools
+encountered during literature reading.
+
+Each tool should have:
+
+- Tool name
+- Description
+- Research application
+- Category
+- Supported input formats
+- Supported sequencing technologies
+- Algorithms used
+- Installation instructions
+- Documentation URL
+- GitHub URL
+- Associated publications
+- Advantages
+- Limitations
+- Personal experience
+- Learning status
+
+Initial categories:
+
+- Genome assembly
+- Read alignment
+- Variant calling
+- Structural variant detection
+- Copy number analysis
+- Variant annotation
+- Graph genome analysis
+- Genome comparison
+- RNA-seq analysis
+- Single-cell analysis
+- Phylogenetics
+- Phylodynamics
+- Phylogeography
+- Statistical genetics
+- Functional genomics
+
+Include examples of tools such as:
+
+Hifiasm, Flye, Minigraph-Cactus, VG, minimap2,
+BWA, Bowtie2, STAR, HISAT2, GATK, DeepVariant,
+Strelka2, Mutect2, bcftools, VEP, SnpEff,
+samtools, IQ-TREE, BEAST2 and Nextstrain.
+
+These should be editable entries, not assumptions
+that the user has mastered them.
+
+==================================================
+8. AUTHOR AND CITATION TRACKING
+==================================================
+
+Develop a citation intelligence module.
+
+Allow the user to:
+
+- View papers cited by a publication.
+- Discover newer papers citing it.
+- Find related publications.
+- Follow important researchers.
+- Track influential authors.
+- Monitor selected research groups.
+- Discover emerging research topics.
+
+Integrate available citation information from
+OpenAlex and Semantic Scholar.
+
+Provide BibTeX and RIS export.
+
+Never invent missing citation relationships.
+
+==================================================
+9. RESEARCH MILESTONE AND TASK MANAGEMENT
+==================================================
+
+Build a PhD progress tracker.
+
+Allow the user to create:
+
+- Research objectives.
+- Specific milestones.
+- Weekly goals.
+- Monthly targets.
+- Tasks.
+- Deadlines.
+- Supervisor meeting records.
+- Manuscript targets.
+- Training activities.
+
+Provide a Kanban board:
+
+- To do
+- In progress
+- Completed
+- On hold
+
+Allow tasks to be associated with publications,
+research notes and research objectives.
+
+==================================================
+10. WEB AND RESEARCH MONITORING
+==================================================
+
+Create a configurable web monitoring module.
+
+Allow users to follow:
+
+- Research laboratories.
+- Research institutes.
+- Genomics centres.
+- Relevant journals.
+- Scientific organisations.
+- Bioinformatics software repositories.
+- Important researchers.
+- Relevant funding opportunities.
+
+Use RSS feeds, official APIs and permitted scraping.
+
+Provide notifications when new relevant content appears.
+
+For GitHub repositories, monitor releases and updates
+of selected bioinformatics tools using the GitHub API.
+
+Never scrape websites indiscriminately.
+
+==================================================
+11. DASHBOARD AND USER INTERFACE
+==================================================
+
+Design a professional, clean scientific dashboard.
+
+The interface should be intuitive, responsive and
+suitable for daily academic use.
+
+Main navigation:
+
+1. Overview
+2. Discover Literature
+3. Recommended Reading
+4. Reading Tracker
+5. Literature Library
+6. Research Notes
+7. Bioinformatics Tools
+8. Authors and Citations
+9. Research Projects
+10. Tasks and Milestones
+11. Research Monitoring
+12. Reports
+13. Settings
+
+DASHBOARD WIDGETS:
+
+- Papers read this week.
+- Weekly target: 4 papers.
+- Reading progress.
+- Pending recommendations.
+- Recently discovered papers.
+- Important saved papers.
+- Upcoming tasks.
+- Research milestones.
+- Recently added notes.
+- Research topic distribution.
+- Monthly reading trends.
+
+Use interactive charts.
+
+Provide global search across publications,
+notes, tools and research activities.
+
+==================================================
+12. AUTOMATED WEEKLY RESEARCH DIGEST
+==================================================
+
+Generate a weekly research digest automatically.
+
+The digest should contain:
+
+1. Four recommended papers.
+2. Newly published papers relevant to the PhD.
+3. Important preprints.
+4. Emerging research trends.
+5. Newly discovered methods and software.
+6. Papers citing important saved publications.
+7. Outstanding reading tasks.
+8. Progress against the four-paper target.
+
+Include a concise explanation of why each item matters.
+
+Allow export as PDF and Markdown.
+
+==================================================
+13. DATABASE DESIGN
+==================================================
+
+Design a relational database with appropriate tables
+for:
+
+- Publications
+- Authors
+- Publication authors
+- Research topics
+- Publication topics
+- Reading records
+- Recommendations
+- Search profiles
+- Research notes
+- Research ideas
+- Methods
+- Software tools
+- Citations
+- Research projects
+- Tasks
+- Milestones
+- Websites
+- Monitoring records
+- Weekly digests
+- Application settings
+
+Use appropriate foreign keys, indexes and constraints.
+
+Ensure that the database persists between application
+restarts.
+
+Implement database migrations.
+
+==================================================
+14. RELIABILITY AND SCIENTIFIC INTEGRITY
+==================================================
+
+This is a research application. Accuracy matters.
+
+Implement:
+
+- Duplicate detection.
+- API error handling.
+- Retry mechanisms.
+- Rate limiting.
+- Request logging.
+- Data validation.
+- Database backups.
+- Missing metadata handling.
+- Source attribution.
+- Date tracking.
+
+Never fabricate:
+
+- Publication titles.
+- Authors.
+- DOIs.
+- Citation counts.
+- Publication dates.
+- Abstracts.
+- Scientific findings.
+
+Clearly distinguish published articles from preprints.
+
+Clearly identify information generated by AI.
+
+Never treat AI-generated summaries as substitutes
+for reading original scientific publications.
+
+Include links to original sources for verification.
+
+==================================================
+15. COST AND DEPLOYMENT REQUIREMENTS
+==================================================
+
+The application must be usable without paid services.
+
+Prefer:
+
+- Local execution.
+- Free public academic APIs.
+- Open-source Python packages.
+- SQLite.
+- Free RSS feeds.
+- GitHub version control.
+
+AI integration must be OPTIONAL.
+
+The application should remain functional without
+an OpenAI, Gemini or other paid API key.
+
+Where AI summarisation is unavailable, use metadata,
+abstracts and rule-based recommendations.
+
+Never make the application dependent on a paid LLM.
+
+Use free hosting only as an optional future extension.
+Do not assume that free hosting provides persistent
+storage or unrestricted background scheduling.
+
+==================================================
+16. DEVELOPMENT APPROACH
+==================================================
+
+Do not attempt to generate the entire application
+as one unverified implementation.
+
+Work in phases.
+
+PHASE 1:
+- Establish project architecture.
+- Create database.
+- Build dashboard.
+- Build literature discovery.
+- Integrate OpenAlex and PubMed.
+- Implement search and deduplication.
+
+PHASE 2:
+- Integrate Europe PMC, Crossref and Semantic Scholar.
+- Add preprint discovery.
+- Build recommendation engine.
+- Build weekly reading tracker.
+
+PHASE 3:
+- Build research notes.
+- Build methods and software database.
+- Build task and milestone management.
+- Implement citation tracking.
+
+PHASE 4:
+- Build web monitoring.
+- Add automated weekly digest.
+- Implement scheduling.
+- Add export functionality.
+
+PHASE 5:
+- Test all modules.
+- Validate API integrations.
+- Test database persistence.
+- Test duplicate detection.
+- Test scheduling.
+- Test recommendation logic.
+- Improve the user interface.
+- Document deployment and backup procedures.
+
+After each phase:
+
+1. Run the application.
+2. Run relevant tests.
+3. Inspect the interface.
+4. Fix errors.
+5. Verify that implemented features work.
+6. Update README.md.
+
+Do not claim a feature is complete until it has
+been implemented and tested.
+
+If an API requires a key, provide instructions
+for obtaining it and make the integration optional.
+
+Before starting development, produce:
+
+- A system architecture document.
+- A database schema.
+- A development roadmap.
+- A list of required dependencies.
+- A list of API integrations.
+
+Then begin implementation.
+
+The final objective is a genuinely useful, reliable
+personal research intelligence system that helps
+the user become a more organised, knowledgeable
+and productive PhD researcher.
