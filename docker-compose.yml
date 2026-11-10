@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  genomiq:
+    build: .
+    container_name: genomiq_hub
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    volumes:
+      # Persistent storage: all publications, reading notes, and progress stay saved on your host machine
+      - ./data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:////app/data/genomiq.db
+      - OPENALEX_MAILTO=phd.researcher@example.org

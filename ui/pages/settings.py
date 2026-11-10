@@ -67,14 +67,34 @@ def render_settings_page():
 
     with tab_backup:
         st.subheader("Local Database Backups & Data Safety")
-        st.write("GenomIQ stores all scientific records locally in SQLite (`data/genomiq.db`). You can create timestamped backups at any time.")
+        st.write("GenomIQ stores all publications, reading reflections, notes, and tasks in a persistent SQLite database (`data/genomiq.db`).")
 
-        if st.button("💾 Create Immediate Backup", type="primary"):
-            bpath = backup_database()
-            if bpath:
-                st.success(f"Successfully created database backup at:\n`{bpath}`")
-            else:
-                st.error("Database file not found.")
+        from config import DB_FILE
+        if DB_FILE.exists():
+            db_size_kb = round(DB_FILE.stat().st_size / 1024, 1)
+            st.info(f"📁 **Active Database Location:** `{DB_FILE}` ({db_size_kb} KB)")
+
+            b_c1, b_c2 = st.columns(2)
+            with b_c1:
+                if st.button("💾 Create Timestamped Snapshot", type="primary", use_container_width=True):
+                    bpath = backup_database()
+                    if bpath:
+                        st.success(f"Backup snapshot saved to:\n`{bpath}`")
+                    else:
+                        st.error("Database file not found.")
+
+            with b_c2:
+                with open(DB_FILE, "rb") as f_db:
+                    db_bytes = f_db.read()
+                st.download_button(
+                    "📥 Download Database File (.db)",
+                    data=db_bytes,
+                    file_name="genomiq_database.db",
+                    mime="application/x-sqlite3",
+                    use_container_width=True
+                )
+        else:
+            st.warning("Database file not yet created.")
 
     with tab_api:
         st.subheader("Academic APIs & Credentials")
