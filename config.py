@@ -15,9 +15,24 @@ ENV_PATH = BASE_DIR / ".env"
 if ENV_PATH.exists():
     load_dotenv(ENV_PATH)
 
-# Database
+# Database configuration with Cloud & Secrets fallback
 DB_FILE = DATA_DIR / "genomiq.db"
-DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{DB_FILE.as_posix()}")
+
+_db_url = os.getenv("DATABASE_URL")
+if not _db_url:
+    try:
+        import streamlit as _st
+        if hasattr(_st, "secrets") and "DATABASE_URL" in _st.secrets:
+            _db_url = _st.secrets["DATABASE_URL"]
+    except Exception:
+        pass
+
+if _db_url:
+    if _db_url.startswith("postgres://"):
+        _db_url = _db_url.replace("postgres://", "postgresql://", 1)
+    DATABASE_URL = _db_url
+else:
+    DATABASE_URL = f"sqlite:///{DB_FILE.as_posix()}"
 
 # App metadata
 APP_TITLE = "GenomIQ Research Hub"

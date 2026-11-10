@@ -96,6 +96,17 @@ def render_settings_page():
         else:
             st.warning("Database file not yet created.")
 
+        st.markdown("---")
+        st.markdown("##### 🔄 Restore / Import Database File")
+        st.caption("Upload a previously downloaded `.db` file to immediately restore all your reading history, annotations, and tasks.")
+        uploaded_db = st.file_uploader("Upload .db Backup File", type=["db", "sqlite", "sqlite3"], key="restore_db_uploader")
+        if uploaded_db is not None:
+            if st.button("⚠️ Confirm Database Restore", type="secondary"):
+                with open(DB_FILE, "wb") as f_out:
+                    f_out.write(uploaded_db.getbuffer())
+                st.success("Database restored successfully! Refreshing dashboard...")
+                st.rerun()
+
     with tab_api:
         st.subheader("Academic APIs & Credentials")
         st.write("GenomIQ operates entirely on free open-source APIs without requiring paid keys.")
