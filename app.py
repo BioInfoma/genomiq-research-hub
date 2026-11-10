@@ -35,8 +35,12 @@ from ui.pages.settings import render_settings_page
 
 def main():
     # 1. Initialize database and seed starter profiles/tools
-    init_db()
-    seed_all()
+    try:
+        init_db()
+        seed_all()
+    except Exception as e:
+        st.error(f"⚠️ Database Notice: {e}")
+        st.info("Operating in safe read-only / memory mode.")
 
     # 2. Start background scheduler
     start_background_scheduler()
