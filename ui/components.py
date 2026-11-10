@@ -1,6 +1,7 @@
 """
 Reusable UI Components and Academic Styling for GenomIQ Research Hub.
 """
+from typing import Any
 import streamlit as st
 
 
